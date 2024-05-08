@@ -1,86 +1,82 @@
 header {
-    background-image: linear-gradient(to right, #9F37FD, #21D2FE);
-    height: 60px;
-    margin-bottom: 20px;
-    color: lightcyan;
-    text-align: end;
-    padding-right: 10px;
+  background-image: linear-gradient(to right, #9f37fd, #21d2fe);
+  height: 60px;
+  margin-bottom: 20px;
+  color: lightcyan;
+  text-align: end;
+  padding-right: 10px;
 }
 
-.search-area{
-    display: flex;
-    padding: 10px;
-    flex-direction: column;
+.search-area {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
 }
 
-.search-area h3{
-    padding-top: 10px;
-    color: #9F37FD;
-    font-size: 1.5em;
-    margin-bottom: 10px;
+.search-area h3 {
+  padding-top: 10px;
+  color: #9f37fd;
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
-.search-area h2{
-    color: #21D2FE;
-    margin-bottom: 10px;
-
-
+.search-area h2 {
+  color: #21d2fe;
+  margin-bottom: 10px;
 }
 
-input[type="text"]{
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 2px solid #6B78FE;
-    border-radius: 5px;
+input[type="text"] {
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 2px solid #6b78fe;
+  border-radius: 5px;
 }
 
 #search-button {
-    padding: 5px;
-    background-color: #6B78FE;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 5px;
+  background-color: #6b78fe;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 #search-button:hover {
-    background-color: #9F37FD;
-    transition: 0.25s;
+  background-color: #9f37fd;
+  transition: 0.25s;
 }
 
 .search-results {
-    border: 2px solid #21D2FE;
-    border-radius: 5px;
+  border: 2px solid #21d2fe;
+  border-radius: 5px;
 }
 
-.forecast h3{
-    color: #4f59c0;
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-
-    
+.forecast h3 {
+  color: #4f59c0;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
 }
 
-.forecast-day{
-    background-color: #6B78FE;
-    color: white;
-    height: 200px;
-    width: 200px;
-    border-radius: 5px;
-    border: solid 2px white;
-    text-align: center;
+.forecast-day {
+  background-color: #6b78fe;
+  color: white;
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
+  border: solid 2px white;
+  text-align: center;
 }
 
-.forecast-container{
-    display: flex;
-    flex-direction: row;
+.forecast-container {
+  display: flex;
+  flex-direction: row;
 }
 
-.search-display{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-    justify-content: center;
+.search-display {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  justify-content: center;
 }
