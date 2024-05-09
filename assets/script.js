@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const APIKey = "19c27de93d60766809ce3d1b94ccba82";
   const queryURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
   // fetch(queryURL);
-
+  console.log(queryURL);
   //event listener for form submit
   console.log(searchForm);
   searchForm.addEventListener("submit", function (event) {
@@ -126,8 +126,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // clear search history button
   const clearButton = document.getElementById("clear-history");
+  const searchHistoryList = document.getElementById("searchHistoryList");
+  console.log(searchHistoryList);
   clearButton.addEventListener("click", function () {
-    localStorage.removeItem("searchHistory");
+    localStorage.removeItem("searchHistoryList");
     searchHistory.innerHTML = "";
   });
 });

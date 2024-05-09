@@ -23,7 +23,7 @@
       <h1>Weather Dashboard</h1>
     </header>
     <!-- contains search bar -->
-    <div class="search-area">
+    <div id="search-area">
       <form id="search-form">
         <h2>Search for a City :</h2>
         <input type="text" id="search-input" placeholder="Enter a city name" />
@@ -31,15 +31,17 @@
       </form>
       <div id="search-history">
         <h3>Search History</h3>
-        <ul id="search-history-list"></ul>
+        <ul id="search-history-list">
+          <button id="clear-history">Clear History</button>
+        </ul>
       </div>
     </div>
-    <div class="search-display"></div>
-    <div class="weather-now"></div>
+    <div id="search-display"></div>
+    <div id="weather-now"></div>
     <!-- 5-Day Forecast -->
-    <div class="forecast">
+    <div id="forecast">
       <h3>5-Day Forecast</h3>
-      <div class="forecast-container">
+      <div id="forecast-container">
         <div class="forecast-day box">
           <h4>Day 1</h4>
           <img src="" alt="" class="forecast-icon" />
