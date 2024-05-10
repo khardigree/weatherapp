@@ -29,9 +29,10 @@ document.addEventListener("DOMContentLoaded", function () {
     forecast.innerHTML = "";
 
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=metric`
+      `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}&units=metric`
     )
       .then((response) => {
+        console.log('response', response);
         if (!response.ok) {
           throw new Error("No, put a real one >:(");
         }
@@ -39,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
 
       .then((data) => {
+        console.log('data', data);
         showWeather(data);
         keepSearchHistory(city);
       })
@@ -86,6 +88,51 @@ document.addEventListener("DOMContentLoaded", function () {
 
     forecast.innerHTML = showWeatherHTML;
   }
+
+  function fetchForecast(city) {
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey}&units=metric`
+    )
+    .then(response => response.json())
+        .then(data => {
+            // Display forecast
+            displayForecast(data);
+        })
+        .catch(error => {
+            console.error('Cannot', error);
+        });
+     
+  }
+
+  function showForecast(data) {
+    const forecastData = data.list.slice(0, 5);
+let forecastHTML = '';
+
+forecastData.forEach((forecast, index) => {
+
+    const { dt, main, weather, wind } = forecast;
+    const forecastDate = dayjs().add(index + 1, 'day'); 
+    const formattedDate = forecastDate.format('dddd, MMM D'); 
+    const humidity = main.humidity;
+    const windSpeed = wind.speed;
+    const temperature = main.temp;
+    const temperatureFahrenheit = (temperature * 9/5) + 32;
+    const weatherDescription = weather[0].description;
+    const iconCode = weather[0].icon;
+
+    forecastHTML += `
+        <div class="forecast-item">
+            <h3>${formattedDate}</h3>
+            <img src="http://openweathermap.org/img/wn/${iconCode}.png" alt="Weather Icon">
+            <p>${weatherDescription}</p>
+            <p>Temperature: ${temperatureFahrenheit.toFixed(1)}°F</p>
+            <p>Humidity: ${humidity}%</p>
+            <p>Wind Speed: ${windSpeed} m/s</p>
+        </div>
+    `;
+});
+
+forecast.innerHTML = forecastHTML;
+}
 
   function keepSearchHistory(city) {
     let searchHistory = localStorage.getItem("searchHistory");
