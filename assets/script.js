@@ -3,8 +3,7 @@ const cities = JSON.parse(localStorage.getItem("cities")) || [];
 const today = dayjs().format("MM/DD/YYYY");
 
 // function to make weather card
-function createWeatherCard(city, state, weatherData) {
-  // Create card elements
+function createWeatherCard(city, state, weatherData, isFirstCard = false) {
   const card = $("<div>")
     .addClass("card border-white")
     .append(
@@ -58,68 +57,14 @@ function createWeatherCard(city, state, weatherData) {
             .text("Feels Like Temperature: " + weatherData.feelsLikeTemperature)
         )
     );
+
+  // Add the first-card class if it's the first card
+  if (isFirstCard) {
+    card.addClass("first-card");
+  }
+
   return card;
 }
-
-// function createCurrentWeatherCard(city, state, weatherData) {
-//   // Create card elements
-//   const card = $("<div>")
-//     .addClass("card border-white")
-//     .append(
-//       $("<div>")
-//         .addClass("card-header")
-//         .append($("<div>").text(`${city}, ${state}`).addClass("city-name"))
-//         .append($("<div>").text(weatherData.date).addClass("date"))
-//     )
-//     .append(
-//       $("<div>")
-//         .addClass("card-body")
-//         .append(
-//           $("<p>")
-//             .addClass("card-text")
-//             .append(
-//               $("<img>")
-//                 .addClass("weather-icon")
-//                 .attr(
-//                   "src",
-//                   "https://openweathermap.org/img/w/" +
-//                     weatherData.weatherIcon +
-//                     ".png"
-//                 )
-//                 .attr("alt", weatherData.weatherDescription.toUpperCase()),
-//               $("<span>").text(weatherData.weatherDescription.toUpperCase())
-//             )
-//         )
-//         .append(
-//           $("<p>")
-//             .addClass("card-text")
-//             .text("High: " + weatherData.highTemperature)
-//         )
-//         .append(
-//           $("<p>")
-//             .addClass("card-text")
-//             .text("Low: " + weatherData.lowTemperature)
-//         )
-//         .append(
-//           $("<p>")
-//             .addClass("card-text")
-//             .text("Wind: " + weatherData.windSpeed)
-//         )
-//         .append(
-//           $("<p>")
-//             .addClass("card-text")
-//             .text("Humidity: " + weatherData.humidity)
-//         )
-//         .append(
-//           $("<p>")
-//             .addClass("card-text")
-//             .text("Feels Like Temperature: " + weatherData.feelsLikeTemperature)
-//         )
-//     );
-//   if (city === 0) {
-//     return card;
-//   }
-// }
 
 //store city info
 function storeCity(evt) {
@@ -205,7 +150,6 @@ function getWeather(cityObj) {
       }
       return response.json();
     })
-
     .then((data) => {
       if (!data || !data.list) {
         throw new Error("No data :(");
@@ -214,7 +158,6 @@ function getWeather(cityObj) {
       const weatherCards = [];
       console.log(data);
       data.list.forEach((day, index) => {
-        console.log(index);
         if (index === 0 || (index + 1) % 8 === 0) {
           const weatherData = {
             date: dayjs.unix(day.dt).format("dddd MM/DD/YYYY"),
@@ -227,42 +170,20 @@ function getWeather(cityObj) {
             weatherIcon: day.weather[0].icon,
           };
 
-          let cityObj = {
-            city: day.name,
-            countryCode: day.country,
-            latitude: day.lat,
-            longitude: day.lon,
-          };
-
-          const card = createWeatherCard(city, state, weatherData);
+          const card = createWeatherCard(city, state, weatherData, index === 0);
 
           if (index === 0) {
-            $("#forecast").empty();
+            $("#first-card-container").empty(); // Clear the forecast area for the first card
+            $("#first-card-container").append(card); // Append the first card directly
           } else {
-            weatherCards.push(card);
+            weatherCards.push(card); // Push other cards to the array
           }
-
-          // const currentCard = createCurrentWeatherCard(
-          //   city,
-          //   state,
-          //   weatherData
-          // );
-
-          // if (index === 0) {
-          //   $("#current-weather").empty();
-          //   // $("#current-weather").append(currentCard);
-          // } else {
-          //   weatherCards.push(currentCard);
-          // }
         }
       });
 
-      // Clear existing cards
-      $("#forecast").empty();
-      // Append remaining cards to next5DaysWeatherCards container
+      // Append remaining cards to the forecast container
       weatherCards.forEach((card) => {
-        // append card
-        $("#forecast").append($(card).addClass("forecast bg-dark text-white"));
+        $("#other-cards-container").append($(card).addClass("forecast"));
       });
     });
 }
