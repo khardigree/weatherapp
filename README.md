@@ -23,14 +23,18 @@ Clear search history functionality.
 ## Technologies Used
 
 HTML
+
 CSS
+
 JavaScript (ES6)
+
 jQuery
+
 Bootstrap
+
 Day.js
+
 OpenWeather API
-Getting Started
-To get a local copy of the project up and running, follow these steps:
 
 ## Prerequisites
 
@@ -39,10 +43,14 @@ An internet connection
 
 ## Usage
 
-Open the application in your web browser.
+Open the application in your web browser: https://khardigree.github.io/weatherapp/.
+
 Enter the name of a city in the search bar and click the "Search" button.
+
 View the current weather and 5-day forecast for the entered city.
+
 The searched cities will be stored in the search history. Click on a city in the history to view its weather again.
+
 To clear the search history, click the "Clear History" button.
 
 ## License
