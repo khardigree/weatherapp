@@ -61,6 +61,8 @@ function createWeatherCard(city, state, weatherData, isFirstCard = false) {
   // Add the first-card class if it's the first card
   if (isFirstCard) {
     card.addClass("first-card");
+  } else {
+    card.addClass("other-cards");
   }
 
   return card;
@@ -155,9 +157,16 @@ function getWeather(cityObj) {
         throw new Error("No data :(");
       }
 
+      $("#other-cards-container").empty();
+
       const weatherCards = [];
       console.log(data);
+
+      // let cardCount = 0;
       data.list.forEach((day, index) => {
+        // if (cardCount >= 4) {
+        //   return;
+        // }
         if (index === 0 || (index + 1) % 8 === 0) {
           const weatherData = {
             date: dayjs.unix(day.dt).format("dddd MM/DD/YYYY"),
@@ -183,7 +192,7 @@ function getWeather(cityObj) {
 
       // Append remaining cards to the forecast container
       weatherCards.forEach((card) => {
-        $("#other-cards-container").append($(card).addClass("forecast"));
+        $("#other-cards-container").append($(card).addClass("card"));
       });
     });
 }
@@ -196,23 +205,29 @@ try {
 
 function grabHistory() {
   const cities = JSON.parse(localStorage.getItem("cities")) || [];
-  cities.forEach((city) => {
+  $("#search-history-list").empty(); // Empty the div once before the loop
+  cities.forEach((cityObj) => {
     const cityButton = $("<button>")
-      .addClass("btn btn-secondary")
-      .text(city.city + ", " + city.state)
-      .click(() => getWeather(city));
-    $("#city-history").append(cityButton);
+      .addClass("btn btn-info city-button")
+      .text(cityObj.city + ", " + cityObj.state); // Use the city and state properties of each city object
+    cityButton.on("click", function () {
+      getWeather(cityObj);
+    });
+    $("#search-history-list").append(cityButton); // Append each city button to the div
   });
 }
 
+grabHistory();
 //event listeners for search button
 const searchButton = document.getElementById("search-button");
 
 searchButton.addEventListener("click", storeCity);
 
-//Big card for current weather, when index = 0
+let clearHistoryButton = document.getElementById("clear-history");
 
-//Made function for current weather, need to use bootsrap for positioning and looks, need to make the forecast not include the current day.
-//fix issue where duplicate cards are being made
+clearHistoryButton.addEventListener("click", function () {
+  localStorage.removeItem("cities");
+  $("#search-history-list").empty();
+});
 
-// function to grab cities from search history, append to page, grabHistory not working
+//fix styling on cards

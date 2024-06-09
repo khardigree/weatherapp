@@ -45,6 +45,19 @@ input[type="text"] {
   border-radius: 5px;
 }
 
+#search-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #clear-history {
   padding: 5px;
   background-color: #21d2fe;
@@ -62,48 +75,55 @@ input[type="text"] {
 #forecast-container {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
 
 #search-display {
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
-  justify-content: center;
+  justify-content: space-between;
 }
 
+#forecast-container > div,
+#search-display > div {
+  flex: 0 0 auto;
+}
+
+.d-flex,
 .custom-container {
-  margin-left: 10px !important;
+  width: 100%;
+  margin: 0 0 0 0 !important;
 }
 
 .first-card {
-  /* grid-row: 1;
-  grid-column: 1 / -1 */
-  width: 100% !important; /* or any desired width */
+  box-sizing: border-box !important;
+  size: x-large !important;
+  width: 100% !important;
   height: auto !important;
   background-color: #6b78fe !important;
   color: white;
   border-radius: 5px !important;
   border: solid 2px white !important;
-  margin-left: 10px !important;
+  margin: 0 auto !important;
   padding: 20px !important;
 }
 
-.card {
-  /* grid-row:2 ; */
+.other-cards {
   background-color: #6b78fe !important;
   color: white;
-  border-radius: 5px !important;
-  border: solid 2px white !important;
-  margin-left: 10px !important;
-  max-width: 360px !important;
-  height: 400px !important;
-  padding: 10px !important;
+  border-radius: 5px;
+  border: solid 2px white;
+  padding: 10px;
+  height: 350px !important;
+  width: 100% !important;
 }
 
 #forecast {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
   width: 100%;
 }
 
@@ -111,15 +131,29 @@ input[type="text"] {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 100%;
+}
+
+#parent {
+  width: 100%;
 }
 
 #other-cards-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 10px;
   justify-content: center;
 }
 
-.card-header {
-  justify-content: center !important;
-  size: 20px !important;
+#other-cards-container > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.city-button {
+  color: white;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
 }
